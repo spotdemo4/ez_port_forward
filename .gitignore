@@ -50,6 +50,7 @@ coverage.xml
 .hypothesis/
 .pytest_cache/
 cover/
+tests/port_forwards
 
 # Translations
 *.mo
@@ -164,3 +165,5 @@ cython_debug/
 # test/*
 private/*
 .vscode/*
+.direnv/*
+.envrc

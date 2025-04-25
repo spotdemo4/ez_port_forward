@@ -1,0 +1,33 @@
+# the name of the bridge
+vmbr0:
+    # the interface the bridge is connected to
+    bridge: eno1
+    # the ip range of your subnet you want to make port forwards in
+    # container IDs are used as index into the subnet range
+    subnet: 10.0.0.0/24
+    # this section contains all the forwarding magic
+    forwards: 
+    # this forwards to the container with id 101 and ip 10.0.0.101 (or the 101th IP in the specified subnet above, will fail if id/index outside of subnet)
+        101:
+            # forwards external port 10122 to internal port 22
+            ip: 192.96.218.132
+            ssh: true
+            # forwards multiple external ports to identical internal ports for tcp udp and both
+            tcp: 123,345,567
+            udp: 888,999
+            tcpudp: 111,222
+        102: 
+            # maps external ports 321,345,765 to internal ports 123,345,567
+            ip: 192.96.218.132
+            tcp: 
+                321: 123
+                345: 345 # will notice this port collision with 101 and mark the line in the output as comment
+                765: 567
+        201: # this is equivalent to below
+            ssh:
+        202:
+            tcp:
+                20222: 22
+        233:
+            # use port 23 for ssh shorthand, forwards 23323 to 23
+            ssh: 23 
