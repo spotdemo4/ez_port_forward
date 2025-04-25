@@ -144,7 +144,7 @@ def build_command(
     command = f"iptables -t nat -A PREROUTING -i {bridge} -p {protocol}"
     if from_ip:
         command += f" -d {from_ip}"
-    command += f" --dport {from_port} -j DNAT --to {to_ip}:{to_port}"
+    command += f" --dport {from_port} -j DNAT --to-destination {to_ip}:{to_port}"
 
     if failure:
         up = f"\t# post-up {command}\n"

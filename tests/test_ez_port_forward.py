@@ -49,10 +49,10 @@ def test_build_command():
 
     from ipaddress import ip_address
     result = build_command("tcp", "eno1", None, 456, ip_address("10.0.0.1"), 123, False)
-    assert result == "\tpost-up iptables -t nat -A PREROUTING -i eno1 -p tcp --dport 456 -j DNAT --to 10.0.0.1:123\n\tpost-down iptables -t nat -A PREROUTING -i eno1 -p tcp --dport 456 -j DNAT --to 10.0.0.1:123\n\n"
+    assert result == "\tpost-up iptables -t nat -A PREROUTING -i eno1 -p tcp --dport 456 -j DNAT --to-destination 10.0.0.1:123\n\tpost-down iptables -t nat -A PREROUTING -i eno1 -p tcp --dport 456 -j DNAT --to-destination 10.0.0.1:123\n\n"
 
     result = build_command("tcp", "eno1", None, 123, ip_address("10.0.0.1"), 123, False)
-    assert result == "\tpost-up iptables -t nat -A PREROUTING -i eno1 -p tcp --dport 123 -j DNAT --to 10.0.0.1:123\n\tpost-down iptables -t nat -A PREROUTING -i eno1 -p tcp --dport 123 -j DNAT --to 10.0.0.1:123\n\n"
+    assert result == "\tpost-up iptables -t nat -A PREROUTING -i eno1 -p tcp --dport 123 -j DNAT --to-destination 10.0.0.1:123\n\tpost-down iptables -t nat -A PREROUTING -i eno1 -p tcp --dport 123 -j DNAT --to-destination 10.0.0.1:123\n\n"
 
 
 def test_whole_files():
